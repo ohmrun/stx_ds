@@ -1,0 +1,18 @@
+Haxe Collection Framework
+
+Collections
+
+imperative / functional
+mutable		/ immutable
+
+
+List
+DList
+Array
+Hash
+OrderedHash
+IntHash
+Set
+Bag
+Tree
+Graph
