@@ -1,3 +1,4 @@
+
 hxc
 ===
 #Haxe Collection Library
@@ -20,7 +21,7 @@ mutable	/ immutable
 * Tree
 * Graph
 
-The idea is to compose a set of collections using traits as a reuse mechanism and allow for granularity in composition of functionality. Default collections will be imperative and predictable except for some changes of terminology where it clarifies use.
+The idea is to compose a set of collections using [traits](http://en.wikipedia.org/wiki/Trait_(computer_programming\)) as a reuse mechanism and allow for granularity in composition of functionality. Default collections will be imperative and predictable except for some changes of terminology where it clarifies use.
 
 ##Notions
 
