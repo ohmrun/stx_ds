@@ -1,4 +1,0 @@
--cp src
--cp ../tinkerbell/src
--neko bin/Collections.n
--main Main
