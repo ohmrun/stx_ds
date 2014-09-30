@@ -1,0 +1,10 @@
+-cp src/main/haxe
+-cp src/test/haxe
+
+-lib tink
+-lib stax
+
+-neko bin/ds.n
+-main Main
+
+#--connect 2331
