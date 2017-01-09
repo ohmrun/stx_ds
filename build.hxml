@@ -1,1 +1,5 @@
-hxml/build-dev.hxml
+hxml/common.hxml
+hxml/libs.hxml
+hxml/test/libs.hxml
+hxml/test/common.hxml
+hxml/test/neko.hxml
