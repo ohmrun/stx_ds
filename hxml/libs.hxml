@@ -1,5 +1,4 @@
 -lib stx_tuple
 -lib stx_chunk
 -lib tink_core
--lib stx_addendum
 -lib pointwise
