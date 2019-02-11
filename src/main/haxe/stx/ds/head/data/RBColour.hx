@@ -1,3 +1,3 @@
 package stx.ds.head.data;
 
-private enum RBColour { Red; Black; }
+enum RBColour { Red; Black; }

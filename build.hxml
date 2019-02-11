@@ -1,5 +1,6 @@
-hxml/common.hxml
-hxml/libs.hxml
-hxml/test/libs.hxml
-hxml/test/common.hxml
-hxml/test/neko.hxml
+-main Main
+-lib stx
+-lib utest
+-cp src/main/haxe
+-cp src/test/haxe
+--interp

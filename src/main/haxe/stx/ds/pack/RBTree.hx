@@ -1,6 +1,9 @@
-package stx.ds.head.data;
+package stx.ds.pack;
 
-private enum RBTreeT<T> {
-  Leaf;
-  Node(color: Color, left: TreeT<T>, label: T, right: TreeT<T>);
+import stx.ds.head.data.RBTree in RBTreeT;
+
+@:forward abstract RBTree<T>(RBTreeT<T>) from RBTreeT<T> to RBTreeT<T>{
+  public function new(self){
+    this = self;
+  }
 }
