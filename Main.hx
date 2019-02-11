@@ -7,13 +7,12 @@ using stx.assert.Lift;
 
 import stx.ds.Package;
 import stx.ds.Package.RoseTree;
-import stx.ds.xset.pack.XSet;
+
 import utest.ui.Report;
 import utest.Runner;
 import utest.Test;
 using utest.Assert;
 
-import stx.ds.xset.Package;
 import stx.ds.pack.XerSet;
 
 class Main {
