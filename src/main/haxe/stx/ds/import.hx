@@ -1,19 +1,24 @@
 package stx.ds;
 
-using stx.ds.Lift;
-using stx.core.Lift;
-using stx.assert.Lift;
 
-import tink.core.Noise;
-import haxe.ds.Option;
-import stx.alias.*;
 using Lambda;
+
+using tink.CoreApi;
+
 import haxe.ds.ReadOnlyArray;
 
-import stx.core.Package;
-import stx.assert.Package;
-import stx.ds.Package;
+import stx.core.alias.*;
+import stx.ds.alias.*;
 
-using stx.Tuple;
-import stx.fp.pack.Monoid;
-import stx.fn.pack.FTC;
+import stx.core.head.Data;
+import stx.ds.head.Data;
+
+import stx.core.Package;
+import stx.fp.Package;
+import stx.ds.Package;
+import stx.assert.Package;
+
+using stx.core.Lift;
+using stx.fn.Lift;
+using stx.ds.Lift;
+using stx.assert.Lift;

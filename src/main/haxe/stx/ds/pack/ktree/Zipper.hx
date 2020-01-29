@@ -166,7 +166,7 @@ import stx.ds.head.data.List in ListT;
       }
       path = path.cons(node);
       switch node {
-        case Empty: return false;
+        case Nought: return false;
         default:
       }
 
@@ -186,7 +186,7 @@ import stx.ds.head.data.List in ListT;
     }
     handler(head);
     return if(path == Nil){
-      this.concat(path.cons(Empty));
+      this.concat(path.cons(Nought));
     }else{
       this.tail().concat(path);
     }
@@ -238,7 +238,7 @@ class Zippers{
       function(next:KTree<T>,memo:List<Tuple2<KTree<T>,KTree<T>>>):List<Tuple2<KTree<T>,KTree<T>>>{
         return switch([memo,next]){
           case [Nil,_]:
-            var ls : List<Tuple2<KTree<T>,KTree<T>>> = Cons(tuple2(next,replace),Nil);
+            var ls : List<Tuple2<KTree<T>,KTree<T>>> = List.unit().cons(tuple2(next,replace));
             ls;
           case [memo,Branch(v,rst)]:
             rst = (rst == null) ? Nil : rst;
@@ -249,9 +249,9 @@ class Zippers{
                 }
               );
             var branch : KTree<T>  = Branch(v,leaves);
-            var o : List<Tuple2<KTree<T>,KTree<T>>> = Cons(tuple2(next,branch),memo);
+            var o : List<Tuple2<KTree<T>,KTree<T>>> = memo.cons(tuple2(next,branch));
             o;
-          case [_,Empty] :
+          case [_,Nought] :
             memo;
         }
       },Nil

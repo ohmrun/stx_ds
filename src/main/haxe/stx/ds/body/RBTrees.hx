@@ -32,18 +32,18 @@ class RBTrees{
     return '\n'+rec(tree);
   }
   static public function iterator<V>(tree:RBTree<V>):Iterator<V>{
-    function recurse(head:RBTree<V>,stack:Array<RBTree<V>>):Tuple2<Option<V>,LStream<V>>{
+    function recurse(head:RBTree<V>,stack:Array<RBTree<V>>):LStream<V>{
         //trace(head);
         return switch([head,stack]){
           case [Leaf,[]]            :
-            tuple2(None,recurse.bind(Leaf,[]));
+            LStream.create(None,recurse.bind(Leaf,[]));
           case [Leaf,arr]           : 
             recurse(
-              arr.head().prj(()->Leaf),
+              arr.head().def(()->Leaf),
               arr.tail()
             );
           case [Node(_,l,v,r),arr]  :
-            tuple2(Some(v),recurse.bind(l,arr.cons(r))); 
+            LStream.create(Some(v),recurse.bind(l,arr.cons(r))); 
 
         }
     }
@@ -51,12 +51,14 @@ class RBTrees{
 
     return {
       next : function(){
-        var v : V = val.fst().prj(()->null);
-        val = val.snd()();
+        var res = val.reply();
+        var v : V = res.fst().def(()->null);
+        val = res.snd().reply();
         return v;
       },
       hasNext : function(){
-        return val.fst().map((_)->true).prj(()->false);
+        var res = val.reply();
+        return res.fst().map((_)->true).def(()->false);
       }
     }
   }

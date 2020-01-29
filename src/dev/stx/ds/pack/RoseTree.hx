@@ -8,8 +8,9 @@ import stx.ds.head.data.Nel in NelT;
 
 import stx.ds.pack.Nel;
 import stx.ds.pack.BTree;
+import stx.ds.head.data.BTree in BTreeT;
 
-abstract RoseTree<T>(BTreeNode<T>) from BTreeNode<T> to BTreeNode<T>{
+abstract RoseTree<T>(BTreeT<T>) from BTreeT<T> to BTreeT<T>{
   public function new(?self){
     this = __.exists().ordef(self,Empty); 
   }
@@ -19,8 +20,8 @@ class RoseTrees{
   static public function siblings<T>(t:RoseTree<T>):Array<RoseTree<T>>{
     function rec(t:RoseTree<T>,arr:Array<RoseTree<T>>){
       return switch (t) {
-        case Empty        : [];
-        case Leaf(v,l,r)  : rec(l,arr.concat([l]));
+        case Empty          : [];
+        case Split(v,l,r)   : rec(l,arr.concat([l]));
       }
     }
     return rec(t,[]);
@@ -29,7 +30,7 @@ class RoseTrees{
     function rec(t,arr:Array<RoseTree<T>>){
       return switch(t){
         case Empty        : [];
-        case Leaf(_,_,r)  : rec(r,arr.concat([r]));
+        case Split(_,_,r)  : rec(r,arr.concat([r]));
       }
     }
     return rec(t,[]);
@@ -39,8 +40,8 @@ class RoseTreeZips{
   static public function down<T>(zip:RoseTreeZip<T>):RoseTreeZip<T>{
     function rec(zip:RoseTreeZip<T>){
       return switch(zip){
-        case InitNel(tuple2(_,Leaf(_,_,r)))       : zip.cons(tuple2(Down,r));
-      //  case ConsNel(_,tuple2(_,Leaf(_,_,r)))   : zip.cons(tuple2(Down,r));          : 
+        case InitNel(tuple2(_,Split(_,_,r)))       : zip.cons(tuple2(Down,r));
+      //  case ConsNel(_,tuple2(_,Split(_,_,r)))   : zip.cons(tuple2(Down,r));          : 
         default                                 : zip;
       }
     }
@@ -58,8 +59,8 @@ class RoseTreeZips{
   }
   static public function next<T>(zip:RoseTreeZip<T>){
     return switch(zip){
-      case InitNel(tuple2(_,Leaf(_,l,_)))     : zip.cons(tuple2(Next,l));
-      case ConsNel(tuple2(_,Leaf(_,l,_)),_)   : zip.cons(tuple2(Next,l));
+      case InitNel(tuple2(_,Split(_,l,_)))     : zip.cons(tuple2(Next,l));
+      case ConsNel(tuple2(_,Split(_,l,_)),_)   : zip.cons(tuple2(Next,l));
       default                                 : zip;
     }
   }

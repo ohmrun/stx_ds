@@ -1,6 +1,11 @@
 -main Main
--lib stx
--lib utest
--cp src/main/haxe
--cp src/test/haxe
 --interp
+
+-lib utest
+
+-lib stx_assert
+-lib stx_fp
+
+-cp src/main/haxe
+
+-D test=stx_ds

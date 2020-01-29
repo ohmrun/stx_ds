@@ -1,21 +1,22 @@
-package test.stx.ds;
+package stx.ds.test;
 
 using Lambda;
 import stx.ds.pack.Set;
 
-class SetTest extends Test{
-  public function test(){
+class SetTest extends utest.Test{
+  static public var orig : Float = haxe.Timer.stamp();
+  public function testSet(){
     function ts(){
       return haxe.Timer.stamp();
     }
     //var orig = ts();
     function next(){
-      return ts() - Main.orig;
+      return ts() - orig;
     }
-    trace(next());
+    //trace(next());
     var set:Set<Int> = Set.create(
-      (l,r) -> l < r ? LessThan : NotLessThan,
-      (l,r) -> l == r ? AreEqual : NotEqual
+      Ords.term.int(),
+      Eqs.term.int()
     );
     var ipt = [1,9,20,3,12,66,100,900,4,2,5,8,6]; 
     set = ipt.fold(

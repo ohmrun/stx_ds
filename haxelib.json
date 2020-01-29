@@ -1,0 +1,21 @@
+{
+    "name": "stx_ds",
+    "license": "MIT",
+    "tags": [
+        "cross",
+        "functional"
+    ],
+    "description": "",
+    "contributors": [
+        "0b1kn00b"
+    ],
+    "releasenote": "",
+    "version": "0.0.1",
+    "url": "http://www.example.com",
+    "dependencies": {
+        "tink_core": "",
+
+        "stx_assert": ""
+    },
+    "classPath": "src/main/haxe"
+}

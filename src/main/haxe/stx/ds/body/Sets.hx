@@ -14,15 +14,15 @@ class Sets{
         case Leaf: 
           Node(Red, Leaf, val, Leaf);
         case Node(color, left, v, right):
-            if (comparator(val, v))
+            if (comparator.duoply(val, v))
                 RBTrees.balance(Node(color, ins(left, comparator), v, right))
-            else if (comparator(v, val))
+            else if (comparator.duoply(v, val))
                 RBTrees.balance(Node(color, left, v, ins(right, comparator)))
             else
                 Node(color,left, val, right);//HMMM
       }
     };
-    return switch (ins(set.data, set.with.lt)) {
+    return switch (ins(set.data, set.with.lt())) {
       case Leaf:
           throw "Never reach here";
       case Node(_, left, label, right):
@@ -48,9 +48,9 @@ class Sets{
       return switch([l,r]){
         case [Leaf,v] : v;
         case [v,Leaf] : v;
-        case [Node(c0,l0,v0,r0),Node(c1,l1,v1,r1)] if (lt(v0,v1).ok()):
+        case [Node(c0,l0,v0,r0),Node(c1,l1,v1,r1)] if (lt().duoply(v0,v1).ok()):
           balance(Node(c1,merge(l,l1),v1,r1));
-        case [Node(c0,l0,v0,r0),Node(c1,l1,v1,r1)] if (lt(v1,v0).ok()):
+        case [Node(c0,l0,v0,r0),Node(c1,l1,v1,r1)] if (lt().duoply(v1,v0).ok()):
           balance(Node(c0,merge(l0,r),v0,r0));
         default : Leaf;
       }
@@ -59,7 +59,7 @@ class Sets{
       return switch (data) {
         case Leaf                 : cons(Leaf);
         case Node(c,l,v,r):
-        if(eq(value,v)){
+        if(eq().duoply(value,v).ok()){
           switch([l,r]){
             case [Leaf,v] : 
               cons(v);
@@ -70,9 +70,9 @@ class Sets{
               //trace(RBTrees.toString(r));
               out;
           }
-        }else if(lt(value,v).ok()){
+        }else if(lt().duoply(value,v).ok()){
           cons(Node(c,rec(l),v,r));
-        }else if(lt(v,value).ok()){
+        }else if(lt().duoply(v,value).ok()){
           cons(Node(c,l,v,rec(r)));
         }else{
           data;
@@ -88,11 +88,11 @@ class Sets{
         case Leaf: 
           false;
         case Node(color, left, v, right):
-          if(with.eq(val,v)){
+          if(with.eq().duoply(val,v).ok()){
             true;
-          }else if(with.lt(val, v).ok()){
+          }else if(with.lt().duoply(val, v).ok()){
             hs(left, with);
-          }else if (with.lt(v, val).ok()){
+          }else if (with.lt().duoply(v, val).ok()){
             hs(right,with);
           }else{
             false;

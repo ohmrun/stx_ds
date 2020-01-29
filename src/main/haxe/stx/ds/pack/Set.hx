@@ -18,11 +18,7 @@ import stx.ds.head.data.RBTree;
     });
   }
   static public function create<T>(ord:Ord<T>,eq:Eq<T>,?data:RBTree<T>):Set<T>{
-    var with : Comparable<T> = 
-      {
-        lt : ord,
-        eq : eq
-      };
+    var with : Comparable<T> = new stx.assert.body.comparable.term.BaseComparable(eq,ord);
     return make(with,data);
   }
   public function put(v:T):Set<T>{

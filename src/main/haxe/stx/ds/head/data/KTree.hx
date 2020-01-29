@@ -4,6 +4,6 @@ import stx.ds.pack.KTree in KTreeA;
 import stx.ds.pack.List in ListA;
 
 enum KTree<T>{
- Empty;
+ Nought;
  Branch(x:T,?xs:ListA<KTreeA<T>>);
 }

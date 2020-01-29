@@ -1,11 +1,13 @@
 package stx.ds.pack;
 
+import stx.ds.pack.ktree.Zipper;
+
 import tink.core.Noise;
 
-
 import stx.ds.body.KTrees;
+
 import stx.ds.head.data.KTree in KTreeT;
-import stx.ds.pack.ktree.Zipper;
+
 using Lambda;
 
 /**
@@ -13,13 +15,13 @@ using Lambda;
 */
 abstract KTree<T>(KTreeT<T>) from KTreeT<T>{
   @:noUsing inline static public function empty<A>() : KTree<A>{
-    return Empty;
+    return Nought;
   }
   @:noUsing inline static public function pure<T>(v:T): KTree<T>{
     return Branch(v,Nil);
   }
   public function new(?self:KTreeT<T>){
-    this = __.exists().ordef(self,Empty);
+    this = __.fault().exists().ordef(self,Nought);
   }
   public function df(){
     return KTrees.iterDF(this);
@@ -71,16 +73,16 @@ abstract KTree<T>(KTreeT<T>) from KTreeT<T>{
         }else{
           handler(ls,rs);
         }
-      case [Empty,Empty] : true;
+      case [Nought,Nought] : true;
       default : false;
     }
   }
   public function toString():String{
     function rec(v:KTree<T>,int):String{
       return switch(v){
-        case Empty          : "";
+        case Nought          : "";
         case Branch(v,rst)  : 
-          var arr = __.exists().ordef(rst,Nil); 
+          var arr = __.fault().exists().ordef(rst,Nil); 
           var out = arr.map((next) -> return rec(next,'$int '));
           var val = out.fold(
             (next,memo) -> '$memo\n$int$next'
