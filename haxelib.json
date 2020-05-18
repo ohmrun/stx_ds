@@ -15,7 +15,9 @@
     "dependencies": {
         "tink_core": "",
 
-        "stx_assert": ""
+        "stx_assert": "",
+        "stx_fp": "",
+        "stx_std": ""
     },
     "classPath": "src/main/haxe"
 }

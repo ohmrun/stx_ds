@@ -1,0 +1,3 @@
+package stx.ds.type;
+
+enum RedBlackSum { Red; Black; }

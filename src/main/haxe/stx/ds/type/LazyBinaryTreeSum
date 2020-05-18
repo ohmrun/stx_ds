@@ -1,0 +1,6 @@
+package stx.ds.type;
+
+enum LazyBinaryTreeSum<T>{
+  LazyEmpty;
+  LazySplit(v:T,l:Thunk<LazyBinaryTreeSum<T>>,r:Thunk<LazyBinaryTreeSum<T>>);
+}

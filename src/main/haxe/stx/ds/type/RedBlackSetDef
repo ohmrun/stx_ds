@@ -1,0 +1,3 @@
+package stx.ds.type;
+
+typedef RedBlackSetDef<T> = { data : RedBlackTreeSum<T>, with : Comparable<T> }; 

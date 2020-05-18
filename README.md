@@ -12,7 +12,7 @@ mutable	/ immutable
 
 * List
 * DList
-* Array
+* Index
 * Hash
 * OrderedHash
 * IntHash
@@ -37,8 +37,8 @@ Two way iterator, with back() and hasBack().
 
 For collections with one entry point i.e stack/queue, doesn't infer any 'endedness'.
 		
-###Array / Hash###
-In this schema there is no real difference between an Array and a Hash at the interface level:
+###Index / Hash###
+In this schema there is no real difference between an Index and a Hash at the interface level:
 
             interface Indexed<V> implements Locatable<Int,V>
 		

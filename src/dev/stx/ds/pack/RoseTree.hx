@@ -1,4 +1,4 @@
-package stx.ds.pack;
+package stx.ds;
 
 using stx.core.Lift;
 using stx.assert.Lift;
@@ -6,8 +6,8 @@ using stx.assert.Lift;
 import haxe.ds.Option;
 import stx.ds.head.data.Nel in NelT;
 
-import stx.ds.pack.Nel;
-import stx.ds.pack.BTree;
+import stx.ds.Nel;
+import stx.ds.BTree;
 import stx.ds.head.data.BTree in BTreeT;
 
 abstract RoseTree<T>(BTreeT<T>) from BTreeT<T> to BTreeT<T>{
@@ -17,8 +17,8 @@ abstract RoseTree<T>(BTreeT<T>) from BTreeT<T> to BTreeT<T>{
 }
 
 class RoseTrees{
-  static public function siblings<T>(t:RoseTree<T>):Array<RoseTree<T>>{
-    function rec(t:RoseTree<T>,arr:Array<RoseTree<T>>){
+  static public function siblings<T>(t:RoseTree<T>):Index<RoseTree<T>>{
+    function rec(t:RoseTree<T>,arr:Index<RoseTree<T>>){
       return switch (t) {
         case Empty          : [];
         case Split(v,l,r)   : rec(l,arr.concat([l]));
@@ -26,8 +26,8 @@ class RoseTrees{
     }
     return rec(t,[]);
   }
-  static public function children<T>(t:RoseTree<T>):Array<RoseTree<T>>{
-    function rec(t,arr:Array<RoseTree<T>>){
+  static public function children<T>(t:RoseTree<T>):Index<RoseTree<T>>{
+    function rec(t,arr:Index<RoseTree<T>>){
       return switch(t){
         case Empty        : [];
         case Split(_,_,r)  : rec(r,arr.concat([r]));
@@ -112,4 +112,4 @@ enum RoseTreeZipNavEdit<T>{
   Append(v:T);
   Rebase(next:RoseTree<T>);
 }
-typedef RoseTreeZipT<T> = stx.ds.pack.Nel<Tuple2<RoseTreeZipNav,RoseTree<T>>>;
+typedef RoseTreeZipT<T> = stx.ds.Nel<Tuple2<RoseTreeZipNav,RoseTree<T>>>;

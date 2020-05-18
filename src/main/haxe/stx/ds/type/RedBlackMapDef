@@ -1,0 +1,3 @@
+package stx.ds.type;
+
+typedef RedBlackMapDef<K, V>  = { data: RedBlackTree<KV<K,V>>, with: Comparable<K> };

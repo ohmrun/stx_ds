@@ -1,21 +1,19 @@
 package ;
 
-import stx.assert.pack.Comparable;
+#if (test=="stx_ds")
+  import stx.ds.test.*;
+#end
 
-using stx.core.Lift;
-using stx.assert.Lift;
+using stx.Core;
+using stx.Assert;
 
-import stx.ds.Package;
-
-import utest.ui.Report;
-import utest.Runner;
-import utest.Test;
-using utest.Assert;
 
 class Main {
 	static function main() {
 		#if test
-			utest.UTest.run(cast stx.ds.Package.tests());
+			utest.UTest.run(
+				[new SetTest()]
+			);
 		#end
 	}
 }

@@ -1,11 +1,10 @@
 package stx.ds.test;
 
 using Lambda;
-import stx.ds.pack.Set;
 
 class SetTest extends utest.Test{
   static public var orig : Float = haxe.Timer.stamp();
-  public function testSet(){
+  public function testRedBlackSet(){
     function ts(){
       return haxe.Timer.stamp();
     }
@@ -14,17 +13,17 @@ class SetTest extends utest.Test{
       return ts() - orig;
     }
     //trace(next());
-    var set:Set<Int> = Set.create(
-      Ords.term.int(),
-      Eqs.term.int()
+    var set:RedBlackSet<Int> = RedBlackSet.make_with(
+      Ord.int(),
+      Eq.int()
     );
     var ipt = [1,9,20,3,12,66,100,900,4,2,5,8,6]; 
     set = ipt.fold(
-      (n,m:Set<Int>) -> m.put(n),
+      (n,m:RedBlackSet<Int>) -> m.put(n),
       set
     );
-    //trace(set.toArray());
-    //trace(set.toArray().length);
+    //trace(set.toIndex());
+    //trace(set.toIndex().length);
     //trace(next());
     set = set.rem(5).rem(100).rem(8);
     trace(next());

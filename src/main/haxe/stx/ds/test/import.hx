@@ -1,7 +1,4 @@
 package stx.ds.test;
 
-import stx.assert.head.Data;
-
-import stx.assert.Package;
-
+using stx.Assert;
 using utest.Assert;

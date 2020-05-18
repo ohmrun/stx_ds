@@ -1,0 +1,6 @@
+package stx.ds.type;
+
+enum BinaryTreeSum<T>{
+  Empty;
+  Split(v:T,l:BinaryTree<T>,r:BinaryTree<T>);
+}
