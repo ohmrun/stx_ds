@@ -1,0 +1,8 @@
+package stx.graph.ifs;
+
+import stx.graph.Package;
+
+interface GraphData{
+    public var vertices(default,null)    : RedBlackSet<Vertex>;
+    public var edges(default,null)       : RedBlackSet<Edge>;    
+}

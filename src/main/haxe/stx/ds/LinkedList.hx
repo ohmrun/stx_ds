@@ -17,7 +17,7 @@ abstract LinkedList<T>(LinkedListSum<T>) from LinkedListSum<T> to LinkedListSum<
   static public function unit<T>():LinkedList<T>{
     return Nil;
   }
-  static public function pure<T>(v:T):LinkedList<T>{
+  @:noUsing static public function pure<T>(v:T):LinkedList<T>{
     return Cons(v,Nil);
   }
   public function new(self:LinkedListSum<T>){
