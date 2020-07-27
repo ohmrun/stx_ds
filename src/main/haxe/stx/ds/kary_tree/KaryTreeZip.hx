@@ -6,6 +6,9 @@ package stx.ds.kary_tree;
   of the form [root,[down,down],current]
 */
 @:forward abstract KaryTreeZip<T>(LinkedList<KaryTree<T>>) from LinkedList<KaryTree<T>>{
+  @:noUsing static public function lift<T>(self:LinkedList<KaryTree<T>>):KaryTreeZip<T>{
+    return new KaryTreeZip(self);
+  }
   public function new(self){
     this = self;
   }
@@ -19,7 +22,7 @@ package stx.ds.kary_tree;
     }
   }
   public function end():KaryTreeZip<T>{
-    return Cons(KaryTree.unit(),this);
+    return lift(Cons(KaryTree.unit(),this));
   }
   /**
     moves to the right sibling
@@ -34,7 +37,7 @@ package stx.ds.kary_tree;
             return o;
           default                     :
             var tree : KaryTree<T> = Branch(v,siblings);
-            Cons(KaryTree.unit(),Cons(tree,previous));
+            lift(Cons(KaryTree.unit(),Cons(tree,previous)));
         }
       default : end();
     }
@@ -48,12 +51,12 @@ package stx.ds.kary_tree;
         switch(find_left(siblings,cursor)){
           case Cons(left,_) :
             var tree : KaryTree<T> = Branch(v,siblings);
-            Cons(left,Cons(tree,previous));
+            lift(Cons(left,Cons(tree,previous)));
           default :
             var tree : KaryTree<T> = Branch(v,siblings);
-            Cons(KaryTree.unit(),Cons(tree,previous));
+            lift(Cons(KaryTree.unit(),Cons(tree,previous)));
         }
-      default : Cons(KaryTree.unit(),this);
+      default : lift(Cons(KaryTree.unit(),this));
     }
   }
   /**
@@ -61,7 +64,7 @@ package stx.ds.kary_tree;
   */
   public function up():KaryTreeZip<T>{
     var o : KaryTreeZip<T> = switch(this){
-      case Cons(cursor,Cons(parent,rest)) : Cons(parent,rest);
+      case Cons(cursor,Cons(parent,rest)) : lift(Cons(parent,rest));
       default                             : this;
     }
     return o;
@@ -71,8 +74,8 @@ package stx.ds.kary_tree;
   */
   public function down():KaryTreeZip<T>{
     return switch this {
-      case Cons(Branch(_,Cons(firstChild,_)),_): Cons(firstChild,this);
-      default: Cons(KaryTree.unit(),this);
+      case Cons(Branch(_,Cons(firstChild,_)),_): lift(Cons(firstChild,this));
+      default: lift(Cons(KaryTree.unit(),this));
     }
 
   }
@@ -89,7 +92,7 @@ package stx.ds.kary_tree;
     Resets navigation.
   */
   public function root():KaryTreeZip<T>{
-    return Cons(this.last(),Nil);
+    return lift(Cons(this.last(),Nil));
   }
   /**
     Produces the Tree
@@ -112,7 +115,7 @@ package stx.ds.kary_tree;
       case Cons(Branch(node,children),rest) :
         var new_node = Branch(node,children.cons(v));
         update(new_node);
-      default : Cons(v,Nil);
+      default : lift(Cons(v,Nil));
     }
   }
   /**
@@ -140,8 +143,8 @@ package stx.ds.kary_tree;
   }
   public function select_child(new_head:KaryTree<T>):KaryTreeZip<T>{
     return switch(this){
-      case Cons(head,t) : Cons(new_head,t);
-      default : Cons(new_head,Nil);
+      case Cons(head,t) : lift(Cons(new_head,t));
+      default : lift(Cons(new_head,Nil));
     }
   }
   public function update(replace:KaryTree<T>):KaryTreeZip<T>{

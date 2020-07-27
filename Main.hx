@@ -4,13 +4,10 @@ package ;
   import stx.ds.test.*;
 #end
 
-using stx.Core;
-using stx.Assert;
-
 
 class Main {
 	static function main() {
-		#if test
+		#if (test=="stx_ds")
 			utest.UTest.run(
 				[new SetTest()]
 			);

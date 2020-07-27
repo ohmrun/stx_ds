@@ -14,8 +14,8 @@ class SetTest extends utest.Test{
     }
     //trace(next());
     var set:RedBlackSet<Int> = RedBlackSet.make_with(
-      Ord.int(),
-      Eq.int()
+      Ord.Int(),
+      Eq.Int()
     );
     var ipt = [1,9,20,3,12,66,100,900,4,2,5,8,6]; 
     set = ipt.fold(
