@@ -1,5 +1,6 @@
 package stx;
 
+import haxe.ds.Map in StdMap;
 #if (test=="stx_ds")
   import stx.ds.test.*;
 #end

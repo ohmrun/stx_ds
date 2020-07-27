@@ -12,5 +12,5 @@ using stx.Fn;
 using stx.Fp;
 using stx.Assert;
 using stx.Ds;
-using stx.Std;
+using stx.Ext;
 
