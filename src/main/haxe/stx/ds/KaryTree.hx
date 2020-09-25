@@ -72,7 +72,7 @@ abstract KaryTree<T>(KaryTreeSum<T>) from KaryTreeSum<T>{
     }
   }
   public function toString():String{
-    function rec(v:KaryTree<T>,int):String{
+    function rec(v:Null<KaryTree<T>>,int):String{
       return switch(v){
         case Nought          : "";
         case Branch(v,rst)  : 
@@ -83,6 +83,7 @@ abstract KaryTree<T>(KaryTreeSum<T>) from KaryTreeSum<T>{
             ,""
           );
           '$v:\n$val';
+        case null           : "";
       }
     }
     var out = rec(this,"  ");

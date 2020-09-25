@@ -16,7 +16,7 @@ typedef RedBlackSetDef<T> = { data : RedBlackTreeSum<T>, with : Comparable<T> };
     });
   }
   static public function make_with<T>(ord:Ord<T>,eq:Eq<T>,?data:RedBlackTree<T>):RedBlackSet<T>{
-    var with : Comparable<T> = new stx.assert.pack.comparable.term.Base(eq,ord);
+    var with : Comparable<T> = new stx.assert.comparable.term.Base(eq,ord);
     return make(with,data);
   }
   @:to public function toIterable():Iterable<T>{

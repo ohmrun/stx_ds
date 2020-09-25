@@ -65,7 +65,13 @@ abstract LinkedList<T>(LinkedListSum<T>) from LinkedListSum<T> to LinkedListSum<
         Cons(x, xs.concat(that));
     };
   }
-  public function find(fn:T->Bool):Option<T>{
+  static public function fromArray<T>(arr:Array<T>):LinkedList<T>{
+    return arr.rfold(
+      (n:T,m:LinkedList<T>) -> m.cons(n),
+      Nil
+    );
+  }
+  public function search(fn:T->Bool):Option<T>{
     return fold(
       (next,memo:Option<T>) -> memo.or(
         () -> fn(next) ? Some(next) : None
@@ -74,7 +80,8 @@ abstract LinkedList<T>(LinkedListSum<T>) from LinkedListSum<T> to LinkedListSum<
   }
   public function fold<B>(f : T -> B -> B, b : B) : B{
     return switch this {
-      case Nil: b;
+      case null : b;
+      case Nil  : b;
       case Cons(x, xs): xs.fold(f,f(x, b));
     }
   }
@@ -113,7 +120,7 @@ abstract LinkedList<T>(LinkedListSum<T>) from LinkedListSum<T> to LinkedListSum<
   public function map<B>(f : T -> B) : LinkedList<B>{
     return switch this {
       case Nil          : Nil;
-      case Cons(x, xs)  : Cons(f(x), xs.map(f));
+      case Cons(x, xs)  : Cons(f(x), __.option(xs).map( _ -> _.map(f)).defv(null));
     };
   }
   public function map_filter<B>(f : T -> Option<B>) : LinkedList<B>{
@@ -139,15 +146,34 @@ abstract LinkedList<T>(LinkedListSum<T>) from LinkedListSum<T> to LinkedListSum<
       default : false;
     }
   }
-  public function zipWith<U>(that:Iterable<U>,with){
-    var it = that.iterator();
-
-    return map(
-      (x) -> if(it.hasNext()){
-        with(x,it.next());
+  public function zip_with<U,V>(that:Iterable<U>,with:T->U->V):LinkedList<V>{
+    var itI   = iterator();
+    var itII  = that.iterator();
+    var rest  = [];
+    while(true){
+      var l_done = false;
+      var r_done = false;
+      var lhs = null;
+      var rhs = null;
+      if(itI.hasNext()){
+        lhs = itI.next();
       }else{
-        throw __.fault().of(ERR_OF(E_IteratorExhaustedUnexpectedly));
+        l_done = true;
       }
+      if(itII.hasNext()){
+        rhs = itII.next();
+      }else{
+        r_done = true;
+      }
+      if(l_done && r_done){
+        break;
+      }else{
+        rest.push(with(lhs,rhs));
+      }
+    }
+    return rest.rfold(
+      (n:V,m:LinkedList<V>) -> m.cons(n),
+      LinkedList.unit()
     );
   };
   public function rfold<Z>(fn:T->Z->Z,z:Z):Z{
@@ -185,8 +211,8 @@ abstract LinkedList<T>(LinkedListSum<T>) from LinkedListSum<T> to LinkedListSum<
       ""
     );
   }
-  public function zip<U>(that){
-    return zipWith(that,__.couple);
+  public function zip<U>(that:Iterable<U>):LinkedList<Couple<T,U>>{
+    return zip_with(that,__.couple);
   }
   public function size(){
     return fold(

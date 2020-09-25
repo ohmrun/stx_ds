@@ -88,6 +88,9 @@ package stx.ds.kary_tree;
       default : null;
     }
   }
+  public function children(){
+    return toTree().children();
+  }
   /**
     Resets navigation.
   */
@@ -150,9 +153,9 @@ package stx.ds.kary_tree;
   public function update(replace:KaryTree<T>):KaryTreeZip<T>{
     return KaryTreeZips.update(this,replace);
   }
-/**
-  Performs a depth first search for predicate FN, and
-*/
+  /**
+    Performs a depth first search for predicate FN, and
+  */
   public function selectDF(fn:T->Bool):KaryTreeZip<T>{
     var head = this.head();
     var path : LinkedList<KaryTree<T>> = Nil;

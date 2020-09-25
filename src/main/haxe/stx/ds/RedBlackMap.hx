@@ -19,7 +19,7 @@ typedef RedBlackMapDef<K, V>  = { data: RedBlackTree<KV<K,V>>, with: Comparable<
     };
   }
   public static function make_with<K, V>(ord: Ord<K>,eq:Eq<K>): RedBlackMap<K, V> {
-    return { data: Leaf, with: new stx.assert.pack.comparable.term.Base(eq,ord) };
+    return { data: Leaf, with: new stx.assert.comparable.term.Base(eq,ord) };
   }
 
   public function set(k:K,v:V):RedBlackMap<K,V>                 return _.set(self,k,v);
