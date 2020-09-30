@@ -17,6 +17,9 @@ abstract LinkedList<T>(LinkedListSum<T>) from LinkedListSum<T> to LinkedListSum<
   static public function unit<T>():LinkedList<T>{
     return Nil;
   }
+  @:noUsing static public function lift<T>(self:LinkedListSum<T>):LinkedList<T>{
+    return new LinkedList(self);
+  }
   @:noUsing static public function pure<T>(v:T):LinkedList<T>{
     return Cons(v,Nil);
   }
@@ -196,7 +199,7 @@ abstract LinkedList<T>(LinkedListSum<T>) from LinkedListSum<T> to LinkedListSum<
           //trace(x);
           //trace(xs);
           var lx = fn(x,memo);
-          var nl = xs.lfold(fn,lx);
+          var nl = __.option(xs).def(unit).lfold(fn,lx);
           nl;
       }
     }
