@@ -6,6 +6,10 @@ package stx.ds.kary_tree;
   of the form [root,[down,down],current]
 */
 @:forward abstract KaryTreeZip<T>(LinkedList<KaryTree<T>>) from LinkedList<KaryTree<T>>{
+  static public var ZERO(default,never):KaryTreeZip<Dynamic> = unit();
+  @:noUsing static public function unit<T>():KaryTreeZip<T>{
+    return lift(Cons(KaryTree.ZERO,Nil));
+  }
   @:noUsing static public function lift<T>(self:LinkedList<KaryTree<T>>):KaryTreeZip<T>{
     return new KaryTreeZip(self);
   }
@@ -22,7 +26,13 @@ package stx.ds.kary_tree;
     }
   }
   public function end():KaryTreeZip<T>{
-    return lift(Cons(KaryTree.unit(),this));
+    return lift(Cons(KaryTree.ZERO,this));
+  }
+  public function has_right(){
+    return switch(right().prj()){
+      case Cons(KaryTree.ZERO,_)  : false;
+      default                     : true;
+    }
   }
   /**
     moves to the right sibling
@@ -77,7 +87,9 @@ package stx.ds.kary_tree;
       case Cons(Branch(_,Cons(firstChild,_)),_): lift(Cons(firstChild,this));
       default: lift(Cons(KaryTree.unit(),this));
     }
-
+  }
+  public function has_down(){
+    return toTree().children().is_defined();
   }
   /*
     Produces the value of the head node.
@@ -150,13 +162,16 @@ package stx.ds.kary_tree;
       default : lift(Cons(new_head,Nil));
     }
   }
+  public function search_child(fn:T->Bool){
+    return toTree().search_child(fn);
+  }
   public function update(replace:KaryTree<T>):KaryTreeZip<T>{
     return KaryTreeZips.update(this,replace);
   }
   /**
     Performs a depth first search for predicate FN, and
   */
-  public function selectDF(fn:T->Bool):KaryTreeZip<T>{
+  public function selefctDF(fn:T->Bool):KaryTreeZip<T>{
     var head = this.head();
     var path : LinkedList<KaryTree<T>> = Nil;
 
@@ -224,6 +239,9 @@ package stx.ds.kary_tree;
   */
   static function tree_equals<T>(treel:KaryTree<T>,treer:KaryTree<T>):Bool{
     return treel == treer;
+  }
+  public function prj(){
+    return this;
   }
 }
 class KaryTreeZips{

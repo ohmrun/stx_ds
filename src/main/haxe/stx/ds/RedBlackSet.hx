@@ -76,6 +76,12 @@ class RedBlackSetLift{
           { data: Node(Black, left, label, right), with: set.with };
     }
   }
+  static public function concat<V>(set:RedBlackSet<V>,xs:Iterable<V>):RedBlackSet<V>{
+    for(x in xs){
+      set = set.put(x);
+    }
+    return set;
+  }
   static public function toString<V>(set:RedBlackSet<V>):String{
     return RedBlackTree._.toString(set.data);
   }
@@ -169,6 +175,18 @@ class RedBlackSetLift{
     }
     return self;
   }
+  static public function difference<T>(self:RedBlackSet<T>,that:RedBlackSet<T>):RedBlackSet<T>{
+    for(val in that){
+      trace(val);
+      self = self.rem(val);
+    }
+    return self;
+  }
+  static public function symmetric_difference<T>(self:RedBlackSet<T>,that:RedBlackSet<T>):RedBlackSet<T>{
+    var a = self.difference(that);
+    var b = that.difference(self);
+    return a.union(b);
+  }
   static public function filter<T>(self:RedBlackSet<T>,fn:T->Bool):RedBlackSet<T>{
     var next = RedBlackSet.make(self.with);
     for(val in self){
@@ -183,5 +201,8 @@ class RedBlackSetLift{
       (next,memo:Equaled) -> memo && (has(self,next) ? AreEqual : NotEqual), 
       AreEqual
     );
+  }
+  static public function is_defined<T>(self:RedBlackSet<T>):Bool{
+    return !(self.data == Leaf);
   }
 }

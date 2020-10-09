@@ -2,6 +2,7 @@ package stx.ds;
 
 import stx.ds.kary_tree.*;
 
+@:using(stx.ds.KaryTree.KaryTreeLift)
 enum KaryTreeSum<T>{
   Nought;
   Branch(x:T,?xs:LinkedList<KaryTree<T>>);
@@ -10,7 +11,10 @@ enum KaryTreeSum<T>{
 /**
  * Immutable Kary Tree. use .zipper to navigate and edit stepwise.
  */
-abstract KaryTree<T>(KaryTreeSum<T>) from KaryTreeSum<T>{
+@:using(stx.ds.KaryTree.KaryTreeLift)
+abstract KaryTree<T>(KaryTreeSum<T>) from KaryTreeSum<T> to KaryTreeSum<T>{
+  static public var _(default,never) = KaryTreeLift;
+  static inline public var ZERO:KaryTree<Dynamic> = Nought;
   @:noUsing inline static public function unit<A>():KaryTree<A>    return Nought;
   @:noUsing inline static public function pure<T>(v:T):KaryTree<T> return Branch(v,Nil);
   
@@ -18,10 +22,10 @@ abstract KaryTree<T>(KaryTreeSum<T>) from KaryTreeSum<T>{
     this = __.that().exists().ordef(self,Nought);
   }
   public function df(){
-    return KaryTrees.iterDF(this);
+    return KaryTreeLift.iterDF(this);
   }
   public function bf(){
-    return KaryTrees.iterBF(this);
+    return KaryTreeLift.iterBF(this);
   }
   public function zipper():KaryTreeZip<T>{
     return new KaryTreeZipper(Cons(this,Nil));
@@ -71,7 +75,18 @@ abstract KaryTree<T>(KaryTreeSum<T>) from KaryTreeSum<T>{
       default : false;
     }
   }
-  public function toString():String{
+}
+
+class KaryTreeLift{
+  static public function search_child<T>(self:KaryTree<T>,fn:T->Bool):Option<KaryTree<T>>{
+    return switch(self){
+      case Branch(x,xs) : __.option(xs).def(LinkedList.unit).search(
+        (tree:KaryTree<T>) -> __.option(tree).map(_ -> _.value()).map(fn).defv(false)
+      );
+      default : None;
+    }
+  }
+  static public function toString<T>(self:KaryTreeSum<T>):String{
     function rec(v:Null<KaryTree<T>>,int):String{
       return switch(v){
         case Nought          : "";
@@ -86,12 +101,9 @@ abstract KaryTree<T>(KaryTreeSum<T>) from KaryTreeSum<T>{
         case null           : "";
       }
     }
-    var out = rec(this,"  ");
+    var out = rec(self,"  ");
     return '\n$out';
   }
-}
-
-class KaryTrees{
   static function next<T>(t:LinkedList<KaryTree<T>>,concat:LinkedList<KaryTree<T>> -> LinkedList<KaryTree<T>> -> LinkedList<KaryTree<T>>):LazyStream<T>{
     return switch t {
       case Cons(Branch(x,xs),rst):

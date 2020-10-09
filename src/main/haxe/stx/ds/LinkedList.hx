@@ -218,9 +218,7 @@ abstract LinkedList<T>(LinkedListSum<T>) from LinkedListSum<T> to LinkedListSum<
     return zip_with(that,__.couple);
   }
   public function size(){
-    return fold(
-      (n,m) -> m++,0
-    );
+    return fold((n,m) -> m+1,0);
   }
   public function is_defined(){
     return switch(this){
