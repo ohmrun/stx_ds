@@ -10,7 +10,7 @@
         "0b1kn00b"
     ],
     "releasenote": "",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "url": "http://www.example.com",
     "dependencies": {
         "tink_core": "2.0.0-rc.1",
