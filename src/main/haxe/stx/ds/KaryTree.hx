@@ -140,17 +140,17 @@ class KaryTreeLift{
     Creates a breadth first iterable from a KaryTree.
   */
   static public function iterBF<T>(node:KaryTree<T>):Iterable<T> return iter(genBF(node));
-  static public function iter<T>(generator:LazyStream<T>):Iterable<T>{
+  static public function iter<T>(generator:LazyStreamTrigger<T>):Iterable<T>{
     return {
       iterator : function(){
-        var cursor = generator.reply();
+        var cursor = generator.next().reply();
         return {
           next : function(){
             var out = switch(cursor.fst()){
               case Some(v)  : v;
               default       : null;
             }
-            cursor = cursor.snd().reply();
+            cursor = cursor.snd().next().reply();
             return out;
           },
           hasNext : function(){

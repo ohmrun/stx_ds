@@ -1,6 +1,0 @@
-package stx.ds.type;
-
-enum LinkedListSum<T>{
-  Nil;
-  Cons(head:T,tail:LinkedList<T>);
-}

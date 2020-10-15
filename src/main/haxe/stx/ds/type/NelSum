@@ -1,6 +1,0 @@
-package stx.ds.type;
-
-enum NelSum<A>{
-  InitNel(x: A);
-  ConsNel(x: A, xs: Nel<A>);
-}

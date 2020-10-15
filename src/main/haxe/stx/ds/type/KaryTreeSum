@@ -1,6 +1,0 @@
-package stx.ds.type;
-
-enum KaryTreeSum<T>{
-  Nought;
-  Branch(x:T,?xs:LinkedList<KaryTree<T>>);
-}

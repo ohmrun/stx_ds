@@ -60,7 +60,7 @@ class RedBlackTreeLift{
       next : function(){
         var res = val.reply();
         var v : V = res.fst().def(()->null);
-        val = res.snd().reply();
+        val = res.snd().next();
         return v;
       },
       hasNext : function(){
