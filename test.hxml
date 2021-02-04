@@ -4,7 +4,8 @@
 -lib utest
 
 -lib stx_assert
--lib stx_fn:1.0.0
+-lib stx_fn
+-lib stx_ds
 
 -cp src/main/haxe
 
