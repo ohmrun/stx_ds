@@ -1,6 +1,9 @@
 package stx.ds;
 
-typedef RedBlackMapDef<K, V>  = { data: RedBlackTree<KV<K,V>>, with: Comparable<K> };
+typedef RedBlackMapDef<K, V>  = { 
+  final data: RedBlackTree<KV<K,V>>;
+  final with: Comparable<K>;
+}
 
 @:forward abstract RedBlackMap<K,V>(RedBlackMapDef<K,V>) from RedBlackMapDef<K,V>{
   public static var _(default,never) = RedBlackMapLift;
