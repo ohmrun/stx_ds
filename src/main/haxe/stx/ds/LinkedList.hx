@@ -74,6 +74,12 @@ abstract LinkedList<T>(LinkedListSum<T>) from LinkedListSum<T> to LinkedListSum<
       Nil
     );
   }
+  static public function fromCluster<T>(arr:Cluster<T>):LinkedList<T>{
+    return arr.rfold(
+      (n:T,m:LinkedList<T>) -> m.cons(n),
+      Nil
+    );
+  }
   public function search(fn:T->Bool):Option<T>{
     return fold(
       (next,memo:Option<T>) -> memo.or(
