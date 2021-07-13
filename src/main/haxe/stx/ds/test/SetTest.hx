@@ -2,7 +2,7 @@ package stx.ds.test;
 
 using Lambda;
 
-class SetTest extends utest.Test{
+class SetTest extends TestCase{
   static public var orig : Float = haxe.Timer.stamp();
   public function testRedBlackSet(){
     function ts(){

@@ -1,5 +1,8 @@
 package ;
 
+using stx.Nano;
+using stx.Test;
+
 #if (test=="stx_ds")
   import stx.ds.test.*;
 #end
@@ -8,8 +11,9 @@ package ;
 class Main {
 	static function main() {
 		#if (test=="stx_ds")
-			utest.UTest.run(
-				[new SetTest()]
+			__.test(
+				[new SetTest()],
+				[]
 			);
 		#end
 	}

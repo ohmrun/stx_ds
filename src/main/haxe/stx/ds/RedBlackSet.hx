@@ -61,9 +61,9 @@ class RedBlackSetLift{
         case Leaf: 
           Node(Red, Leaf, val, Leaf);
         case Node(color, left, v, right):
-            if (comparator.ok(val, v))
+            if (comparator.comply(val, v).ok())
                 RedBlackTree._.balance(Node(color, ins(left, comparator), v, right))
-            else if (comparator.ok(v, val))
+            else if (comparator.comply(v, val).ok())
                 RedBlackTree._.balance(Node(color, left, v, ins(right, comparator)))
             else
                 Node(color,left, val, right);//HMMM
@@ -101,9 +101,9 @@ class RedBlackSetLift{
       return switch([l,r]){
         case [Leaf,v] : v;
         case [v,Leaf] : v;
-        case [Node(c0,l0,v0,r0),Node(c1,l1,v1,r1)] if (lt().applyII(v0,v1).ok()):
+        case [Node(c0,l0,v0,r0),Node(c1,l1,v1,r1)] if (lt().comply(v0,v1).ok()):
           balance(Node(c1,merge(l,l1),v1,r1));
-        case [Node(c0,l0,v0,r0),Node(c1,l1,v1,r1)] if (lt().applyII(v1,v0).ok()):
+        case [Node(c0,l0,v0,r0),Node(c1,l1,v1,r1)] if (lt().comply(v1,v0).ok()):
           balance(Node(c0,merge(l0,r),v0,r0));
         default : Leaf;
       }
@@ -112,7 +112,7 @@ class RedBlackSetLift{
       return switch (data) {
         case Leaf                 : cons(Leaf);
         case Node(c,l,v,r):
-        if(eq().applyII(value,v).ok()){
+        if(eq().comply(value,v).ok()){
           switch([l,r]){
             case [Leaf,v] : 
               cons(v);
@@ -123,9 +123,9 @@ class RedBlackSetLift{
               //trace(RedBlackTree._.toString(r));
               out;
           }
-        }else if(lt().applyII(value,v).ok()){
+        }else if(lt().comply(value,v).ok()){
           cons(Node(c,rec(l),v,r));
-        }else if(lt().applyII(v,value).ok()){
+        }else if(lt().comply(v,value).ok()){
           cons(Node(c,l,v,rec(r)));
         }else{
           data;
@@ -141,11 +141,11 @@ class RedBlackSetLift{
         case Leaf: 
           false;
         case Node(color, left, v, right):
-          if(with.eq().applyII(val,v).ok()){
+          if(with.eq().comply(val,v).ok()){
             true;
-          }else if(with.lt().applyII(val, v).ok()){
+          }else if(with.lt().comply(val, v).ok()){
             hs(left, with);
-          }else if (with.lt().applyII(v, val).ok()){
+          }else if (with.lt().comply(v, val).ok()){
             hs(right,with);
           }else{
             false;

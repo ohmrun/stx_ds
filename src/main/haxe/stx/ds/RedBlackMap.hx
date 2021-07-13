@@ -46,9 +46,9 @@ class RedBlackMapLift{
       return switch (tree) {
         case Leaf: Node(Red, Leaf, { key: key, val: val }, Leaf);
         case Node(color, left, label, right):
-            if (comparator.ok(key, label.key))
+            if (comparator.comply(key, label.key).ok())
                 RedBlackTree._.balance(Node(color, ins(left, comparator), label, right))
-            else if (comparator.ok(label.key, key))
+            else if (comparator.comply(label.key, key).ok())
                 RedBlackTree._.balance(Node(color, left, label, ins(right, comparator)))
             else
                 tree;
@@ -67,9 +67,9 @@ class RedBlackMapLift{
       return switch (tree) {
         case Leaf: null;
         case Node(_, left, label, right):
-            if (self.with.lt().applyII(key, label.key).ok())
+            if (self.with.lt().comply(key, label.key).ok())
                 mem(left);
-            else if (self.with.lt().applyII(label.key, key).ok())
+            else if (self.with.lt().comply(label.key, key).ok())
                 mem(right);
             else
                 label.val;
@@ -93,9 +93,9 @@ class RedBlackMapLift{
       return switch([l,r]){
         case [Leaf,v] : v;
         case [v,Leaf] : v;
-        case [Node(c0,l0,v0,r0),Node(c1,l1,v1,r1)] if (lt.applyII(v0.key,v1.key).ok()):
+        case [Node(c0,l0,v0,r0),Node(c1,l1,v1,r1)] if (lt.comply(v0.key,v1.key).ok()):
           balance(Node(c1,merge(l,l1),v1,r1));
-        case [Node(c0,l0,v0,r0),Node(c1,l1,v1,r1)] if (lt.applyII(v1.key,v0.key).ok()):
+        case [Node(c0,l0,v0,r0),Node(c1,l1,v1,r1)] if (lt.comply(v1.key,v0.key).ok()):
           balance(Node(c0,merge(l0,r),v0,r0));
         default : Leaf;
       }
@@ -104,7 +104,7 @@ class RedBlackMapLift{
       return switch (data) {
         case Leaf                 : cons(Leaf);
         case Node(c,l,v,r):
-        if(eq.applyII(value,v.key).ok()){
+        if(eq.comply(value,v.key).ok()){
           switch([l,r]){
             case [Leaf,v] : 
               cons(v);
@@ -115,9 +115,9 @@ class RedBlackMapLift{
               //trace(RedBlackTree._.toString(r));
               out;
           }
-        }else if(lt.applyII(value,v.key).ok()){
+        }else if(lt.comply(value,v.key).ok()){
           cons(Node(c,rec(l),v,r));
-        }else if(lt.applyII(v.key,value).ok()){
+        }else if(lt.comply(v.key,value).ok()){
           cons(Node(c,l,v,rec(r)));
         }else{
           data;

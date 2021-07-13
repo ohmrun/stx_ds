@@ -1,11 +1,11 @@
 -main Main
 --interp
 
--lib utest
-
+-D no-deprecation-warnings
 -lib stx_assert
 -lib stx_fn
 -lib stx_ds
+-lib stx_test
 
 -cp src/main/haxe
 

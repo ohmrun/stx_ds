@@ -1,19 +1,7 @@
 package stx;
 
 import haxe.ds.Map in StdMap;
-#if (test=="stx_ds")
-  import stx.ds.test.*;
-#end
 
-class Package{
-  #if (test=="stx_ds")
-    static public function tests():Array<utest.Test>{
-      return [
-        new SetTest()
-      ];
-    }
-  #end
-}
 enum RedBlackSum { Red; Black; }
 
 typedef RedBlackMapDef<K, V>  = stx.ds.RedBlackMap.RedBlackMapDef<K, V>;
