@@ -48,6 +48,10 @@ typedef RedBlackSetDef<T> = { data : RedBlackTreeSum<T>, with : Comparable<T> };
   }
   private var self(get,never):RedBlackSet<T>;
   private function get_self():RedBlackSet<T> return this;
+
+  public function toString(){
+    return _.toString(this);
+  }
 }
 
 class RedBlackSetLift{
