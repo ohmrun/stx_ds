@@ -28,4 +28,5 @@ class Test{
     }
     var show = out.toKTree(3).toString();
       //trace(show);
+  }
 }

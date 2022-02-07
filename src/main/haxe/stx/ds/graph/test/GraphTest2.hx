@@ -1,3 +1,5 @@
+package stx.ds.graph.test;
+
 class GraphTest2 {
   var log : stx.Log;
   public function new(log){
@@ -115,7 +117,7 @@ class GraphTest2 {
     var keys    = stx.Reflects.fields(o);
 
     var out : Adj<KeyOrVal> = keys.flatMap(
-      function(key,val){
+      (function(key,val){
         var key_node = ids.next();
         var key_edge = new Edge(tuple2(Key(key),key_node));
         var val_node = ids.next();
@@ -124,7 +126,7 @@ class GraphTest2 {
 
         //var fld_ctx  = new Context().withOutgoing(adj);
         return adj;
-      }.tupled()
+      }).tupled()
     ).toArray();
     //return stx.Context.create([],obj_key,o,out);
     return null;

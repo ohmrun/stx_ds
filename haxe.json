@@ -1,0 +1,11 @@
+{
+  "build" : {
+    "-lib" : ["stx_assert","stx_fn","stx_ds","stx_test"],
+    "unit" : {
+      "--macro" : ["include('stx.Ds',true)","include('stx.ds',true)"],
+      "interp" : {
+        "--interp" : true
+      }
+    }
+  }
+}

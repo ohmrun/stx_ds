@@ -1,10 +1,4 @@
-package stx.alg;
-
-import thx.fp.RedBlackSet;
-import thx.fp.Map;
-import stx.graph.head.Data;
-import stx.graph.Package;
-import stx.graph.Maps;
+package stx.ds.graph.test;
 
 
 class Dep{
@@ -14,8 +8,8 @@ class Dep{
 }
 class GraphTest extends stx.test.TestCase{
     public function test(){
-        var g   = Graph.unit();
-        var c   = new Context(Dep.eq);
+        //var g   = Graph.unit();
+        //var c   = new Context(Dep.eq);
         //var l : List<Vertex> = ["this","then","that","done"].map(Vertex.pure);
         //var g0  = g.circuit(l);
         
@@ -54,7 +48,7 @@ abstract Predicate<T>(PredicateT<T>){
         return Map.empty();
     }
 }
-@:forward abstract AdjacencyMapGraph<T>(Context<AdjacencyMap<T>>) from Context<AdjacencyMap<T>> to Context<AdjacencyMap<T>>{
+//@:forward abstract AdjacencyMapGraph<T>(Context<AdjacencyMap<T>>) from Context<AdjacencyMap<T>> to Context<AdjacencyMap<T>>{
     /*
      empty       = AM $ Map.empty
     vertex  x   = AM $ Map.singleton x RedBlackSet.empty
@@ -66,4 +60,4 @@ abstract Predicate<T>(PredicateT<T>){
                   (keysRedBlackSet $ adjacencyMap x) ]
 
     */
-}
+//}

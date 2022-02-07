@@ -1,4 +1,4 @@
-package stx.ds.body;
+package stx.ds;
 
 import haxe.ds.Option;
 import stx.core.pack.Option;
