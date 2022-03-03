@@ -9,6 +9,9 @@ typedef RedBlackSetDef<T> = { data : RedBlackTreeSum<T>, with : Comparable<T> };
   private function new(self){
     this = self;
   }
+  static public function String():RedBlackSet<String>{
+    return make(Comparable.String());
+  }
   static public function make<T>(with:Comparable<T>,?data:RedBlackTree<T>):RedBlackSet<T>{
     return new RedBlackSet({
       with : with,

@@ -5,7 +5,7 @@ package stx.ds;
 #end
 
 class Package{
-  static public function main():Array<utest.Test>{
+  static public function main():Array<TestCase>{
     return [
       new SetTest()
     ];

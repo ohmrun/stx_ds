@@ -42,6 +42,14 @@ class LiftArrayToLinkedList{
     );
   }
 }
+class LiftClusterToLinkedList{
+  static public function toLinkedList<T>(array:Cluster<T>):LinkedList<T>{
+    return array.rfold(
+      (next,memo:LinkedList<T>) -> memo.cons(next),
+      LinkedList.unit()
+    );
+  }
+}
 class LiftStringMap{
   static public function ds<T>(m:StdMap<String,T>):RedBlackMap<String,T>{
     var nm = RedBlackMap.make(
