@@ -43,11 +43,11 @@ abstract Predicate<T>(PredicateT<T>){
     }
 }
 */
-@:forward abstract AdjacencyMap<T>(Map<T,RedBlackSet<T>>) from Map<T,RedBlackSet<T>> to Map<T,RedBlackSet<T>>{
-    static public function empty<T>():AdjacencyMap<T>{
-        return Map.empty();
-    }
-}
+// @:forward abstract AdjacencyMap<T>(Map<T,RedBlackSet<T>>) from Map<T,RedBlackSet<T>> to Map<T,RedBlackSet<T>>{
+//     static public function empty<T>():AdjacencyMap<T>{
+//         return Map.empty();
+//     }
+// }
 //@:forward abstract AdjacencyMapGraph<T>(Context<AdjacencyMap<T>>) from Context<AdjacencyMap<T>> to Context<AdjacencyMap<T>>{
     /*
      empty       = AM $ Map.empty

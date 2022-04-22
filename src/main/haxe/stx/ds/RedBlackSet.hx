@@ -184,7 +184,7 @@ class RedBlackSetLift{
   }
   static public function difference<T>(self:RedBlackSet<T>,that:RedBlackSet<T>):RedBlackSet<T>{
     for(val in that){
-      trace(val);
+      //trace(val);
       self = self.rem(val);
     }
     return self;
