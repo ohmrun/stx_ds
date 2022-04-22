@@ -13,7 +13,13 @@ enum RedBlackTreeSum<T> {
   }
 }
 class RedBlackTreeLift{
-  public static function balance<T>(tree: RedBlackTree<T>): RedBlackTree<T> {
+  static public function is_defined<T>(self:RedBlackTree<T>):Bool{
+    return switch(self){
+      case Leaf : false;
+      default   : true;
+    }
+  }
+  static public function balance<T>(tree: RedBlackTree<T>): RedBlackTree<T> {
     return switch (tree) {
       case  Node(Black, Node(Red, Node(Red, a, x, b), y, c), z, d)
           | Node(Black, Node(Red, a, x, Node(Red, b, y, c)), z, d)

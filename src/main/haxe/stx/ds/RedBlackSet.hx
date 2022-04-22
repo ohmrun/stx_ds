@@ -209,6 +209,29 @@ class RedBlackSetLift{
       AreEqual
     );
   }
+  static public function less_than<T>(self:RedBlackSet<T>,that:RedBlackSet<T>):Ordered{
+    final l_iter = self.iterator();
+    final r_iter = that.iterator();
+    var res = NotLessThan;
+    while(true){ 
+      switch([l_iter.hasNext(),r_iter.hasNext()]){
+        case [true,true] : 
+          res = self.with.lt().comply(l_iter.next(),r_iter.next());
+          if(res == LessThan){
+            break;
+          }
+        case [true,false] : 
+          res = NotLessThan;
+          break;
+        case [false,true] : 
+          res = LessThan;
+          break;
+        case [false,false] :
+          break;
+      }
+    }
+    return res;
+  }
   static public function is_defined<T>(self:RedBlackSet<T>):Bool{
     return !(self.data == Leaf);
   }
