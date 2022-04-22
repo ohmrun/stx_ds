@@ -15,13 +15,13 @@ typedef RedBlackMapDef<K, V>  = {
       Comparable.String()
     );
   }
-  static public function make<K,V>(with:Comparable<K>,?data:RedBlackTree<KV<K,V>>):RedBlackMap<K,V>{
+  @:noUsing static public function make<K,V>(with:Comparable<K>,?data:RedBlackTree<KV<K,V>>):RedBlackMap<K,V>{
     return {
       with : with,
       data : data == null ? Leaf : data
     };
   }
-  public static function make_with<K, V>(ord: Ord<K>,eq:Eq<K>): RedBlackMap<K, V> {
+  @:noUsing static public function make_with<K, V>(ord: Ord<K>,eq:Eq<K>): RedBlackMap<K, V> {
     return { data: Leaf, with: new stx.assert.comparable.term.Base(eq,ord) };
   }
 

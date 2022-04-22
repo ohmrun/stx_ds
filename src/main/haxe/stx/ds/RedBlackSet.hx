@@ -12,13 +12,13 @@ typedef RedBlackSetDef<T> = { data : RedBlackTreeSum<T>, with : Comparable<T> };
   static public function String():RedBlackSet<String>{
     return make(Comparable.String());
   }
-  static public function make<T>(with:Comparable<T>,?data:RedBlackTree<T>):RedBlackSet<T>{
+  @:noUsing static public function make<T>(with:Comparable<T>,?data:RedBlackTree<T>):RedBlackSet<T>{
     return new RedBlackSet({
       with : with,
       data : data == null ? Leaf : data
     });
   }
-  static public function make_with<T>(ord:Ord<T>,eq:Eq<T>,?data:RedBlackTree<T>):RedBlackSet<T>{
+  @:noUsing static public function make_with<T>(ord:Ord<T>,eq:Eq<T>,?data:RedBlackTree<T>):RedBlackSet<T>{
     var with : Comparable<T> = new stx.assert.comparable.term.Base(eq,ord);
     return make(with,data);
   }

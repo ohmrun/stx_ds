@@ -27,7 +27,7 @@ abstract Context<T,U>(TContext<T,U>) from TContext<T,U>{
   @:to public function toGraph():Graph<T,U>{
     return TGraph.Graph(this,Empty);
   }
-  static public function pure<A,B>(n:Node):Context<A,B>{
+  @:noUsing static public function pure<A,B>(n:Node):Context<A,B>{
     return TContext.Context([],n,null,[]);
   }
   static public function unit<A,B>():Context<A,B>{
