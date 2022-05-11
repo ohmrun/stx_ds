@@ -3,6 +3,7 @@ package stx.ds.graph.pack;
 typedef GraphDef = {
   var vertices    : RedBlackSet<Vertex>;
   var edges       : RedBlackSet<Edge>;
+  var labels      : RedBlackMap<Edge,Label>;
 }
 
 @:using(stx.ds.graph.pack.Graph.GraphLift)
@@ -14,26 +15,29 @@ typedef GraphDef = {
   static private function def():GraphDef{
     return {
       vertices  : Vertex.set(),
-      edges     : Edge.set() 
+      edges     : Edge.set(),
+      labels    : Label.map()
     }
   }
   static public function unit():Graph{
     return def();
   }
-  @:noUsing static public function make(verts,edges):Graph{
+  @:noUsing static public function make(verts,edges,labels):Graph{
     return new Graph({
       vertices : __.option(verts).defv(Vertex.set()),
-      edges    : __.option(edges).defv(Edge.set())
+      edges    : __.option(edges).defv(Edge.set()),
+      labels   : __.option(labels).defv(Label.map()),
     });
   }
-  function clone(?vertices,?edges){
+  function copy(?vertices,?edges,?labels){
     return make(
       __.option(vertices).defv(this.vertices), 
-      __.option(edges).defv(this.edges) 
+      __.option(edges).defv(this.edges),
+      __.option(labels).defv(this.labels) 
     );
   }
   public function node(v:Vertex):Graph{
-    return clone(this.vertices.put(v));
+    return copy(this.vertices.put(v));
   };
 }
 
@@ -49,7 +53,8 @@ class GraphLift{
         
     return {
         vertices : next_vertices,
-        edges    : next_edges     
+        edges    : next_edges,
+        labels   : l.labels.union(r.labels)
     };
   }
   static public function overlay(l:Graph,r:Graph):Graph{
@@ -57,7 +62,8 @@ class GraphLift{
     var next_edges      = l.edges.union(r.edges);
     return {
         vertices    : next_vertices,
-        edges       : next_edges
+        edges       : next_edges,
+        labels      : l.labels.union(r.labels)
     };
   }
   static public function biconnect(l:Graph,r:Graph):Graph{

@@ -227,7 +227,7 @@ class RedBlackSetLift{
           res = LessThan;
           break;
         case [false,false] :
-          break;
+          res;
       }
     }
     return res;

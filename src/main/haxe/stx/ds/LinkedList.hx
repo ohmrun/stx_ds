@@ -105,6 +105,11 @@ abstract LinkedList<T>(LinkedListSum<T>) from LinkedListSum<T> to LinkedListSum<
       iterator : iterator
     };
   }
+  @:to public function toIter():Iter<T>{
+    return Iter.lift({
+      iterator : iterator
+    });
+  }
   public function iterator():Iterator<T>{
     var cursor : Null<LinkedList<T>> = this;
     return {
