@@ -7,6 +7,12 @@
       "interp" : {
         "--interp" : true
       }
+    },
+    "dev" : {
+      "lattice" : {
+        "-main" : "stx.ds.Test",
+        "--interp" :  true
+      }
     }
   }
 }
