@@ -55,6 +55,9 @@ typedef RedBlackSetDef<T> = { data : RedBlackTreeSum<T>, with : Comparable<T> };
   public function toString(){
     return _.toString(this);
   }
+  public function unit():RedBlackSet<T>{
+    return make(this.with);
+  }
 }
 
 class RedBlackSetLift{
@@ -160,6 +163,46 @@ class RedBlackSetLift{
       }
     };
     return hs(set.data,set.with);
+  }
+  static public function split<V>(self:RedBlackSet<V>,item:V){
+    final balance = RedBlackTree._.balance;
+    final cons    = (data) -> RedBlackSet.make(self.with,data);
+    function merge(l:RedBlackTree<V>,r:RedBlackTree<V>){
+      //trace('${s(l)}\n${s(r)}');
+      return switch([l,r]){
+        case [Leaf,v] : v;
+        case [v,Leaf] : v;
+        case [Node(c0,l0,v0,r0),Node(c1,l1,v1,r1)] if (self.with.lt().comply(v0,v1).is_ok()):
+          balance(Node(c1,merge(l,l1),v1,r1));
+        case [Node(c0,l0,v0,r0),Node(c1,l1,v1,r1)] if (self.with.lt().comply(v1,v0).is_ok()):
+          balance(Node(c0,merge(l0,r),v0,r0));
+        default : Leaf;
+      }
+    }
+    function rec(x:RedBlackSet<V>):Couple<RedBlackSet<V>,RedBlackSet<V>>{
+      return switch(x.data){
+        case Leaf                           : __.couple(self.unit(),self.unit());
+        case Node(_, left, label , right)   : 
+          if(self.with.lt().comply(item,label).is_ok() || self.with.lt().comply(item,label).is_ok()){  
+          final next = cons(left);
+          rec(next).decouple(
+            (l:RedBlackSet<V>,r:RedBlackSet<V>) -> __.couple(
+              l,
+              cons(merge(cons(right).put(label).data,r.data))
+            )
+          );
+          }else{
+            final next = cons(right);
+            rec(next).decouple(
+              (l:RedBlackSet<V>,r:RedBlackSet<V>) -> __.couple(
+                  cons(merge(cons(left).put(label).data,l.data)),
+                  r
+              )
+            );
+          }
+      }
+    }
+    return rec(self);
   }
   static public function fold<T,U>(self:RedBlackSet<T>,fn:T->U->U,z:U):U{
     var memo = z;
