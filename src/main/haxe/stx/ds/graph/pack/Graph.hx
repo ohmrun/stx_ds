@@ -41,6 +41,7 @@ typedef GraphDef = {
   };
 }
 
+
 class GraphLift{
   static public function connect(l:Graph,r:Graph):Graph{
     __.assert().exists(l);__.assert().exists(r);
@@ -108,7 +109,6 @@ class GraphLift{
       Eq.Anon((l,r) -> l == r)
     ).put(from);  
     var pure = KaryTree.pure;
-
     var tree = new KaryTree();
     
     var show_edges = g.edges.fold(
