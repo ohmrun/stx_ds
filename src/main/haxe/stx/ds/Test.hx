@@ -7,17 +7,14 @@ import stx.ds.test.*;
 class Test{
   static public function main(){
     __.test([
-      new RedBlackSetTest(),
+      new RedBlackMapTest(),
     ],[]);
   }
 }
-class RedBlackSetTest extends TestCase{
+class RedBlackMapTest extends TestCase{
   public function test(){
-    var set = RedBlackSet.make(Comparable.Int());
-        set = set.concat([1,2,3,4,6,10,55,90,10000,5,458,29]);
-    //trace(set);
-    var v   = set.split(6);
-    trace(v.fst());
-    trace(v.snd());
+    var map = stx.ds.RedBlackMap.make(Comparable.String());
+        map = map.set("a",1).set("a",2).set("b",1000);
+    trace(map.get("b"));
   }
 }

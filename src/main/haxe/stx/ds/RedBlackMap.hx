@@ -5,6 +5,7 @@ typedef RedBlackMapDef<K, V>  = {
   final with: Comparable<K>;
 }
 
+@:using(stx.ds.RedBlackMap.RedBlackMapLift)
 @:forward abstract RedBlackMap<K,V>(RedBlackMapDef<K,V>) from RedBlackMapDef<K,V>{
   public static var _(default,never) = RedBlackMapLift;
 
@@ -21,6 +22,9 @@ typedef RedBlackMapDef<K, V>  = {
       data : data == null ? Leaf : data
     };
   }
+  @:noUsing static public function makeI<K, V>(ord: Ord<K>,eq:Eq<K>): RedBlackMap<K, V> {
+    return { data: Leaf, with: new stx.assert.comparable.term.Base(eq,ord) };
+  }
   @:noUsing static public function make_with<K, V>(ord: Ord<K>,eq:Eq<K>): RedBlackMap<K, V> {
     return { data: Leaf, with: new stx.assert.comparable.term.Base(eq,ord) };
   }
@@ -31,20 +35,38 @@ typedef RedBlackMapDef<K, V>  = {
   public function has(k:K):Bool                                 return __.option(_.get(self,k)).is_defined();
   public function rem(k:K):RedBlackMap<K,V>                     return _.rem(self,k);
   public function iterator():Iterator<KV<K,V>>                  return RedBlackTree._.iterator(this.data);
-  public function keyValIterator()                              return RedBlackTree._.iterator(this.data);
+  public function keyVaIterator()                              return RedBlackTree._.iterator(this.data);
   public function union(that:RedBlackMap<K,V>):RedBlackMap<K,V> return _.union(self,that);
 
   @:to public function toIter():Iter<KV<K,V>>                   return new Iter({ iterator : iterator });
 
   private var self(get,never):RedBlackMap<K,V>;
   private function get_self():RedBlackMap<K,V> return this;
+
+  public function copy(?with,?data){
+    return make(
+      __.option(with).defv(this.with),
+      __.option(data).defv(this.data)
+    );
+  }
+  public function toString(){
+    return this.data.toString();
+  }
 }
 
 class RedBlackMapLift{
   static public inline function set<K, V>(self:RedBlackMap<K,V>,key: K, val: V): RedBlackMap<K, V> {
+    //trace("______________________________");
+    //trace('$key $val');
     function ins(tree: RedBlackTree<KV<K,V>>, comparator: Assertion<K,AssertFailure>): RedBlackTree<KV<K,V>> {
-      return switch (tree) {
-        case Leaf: Node(Red, Leaf, { key: key, val: val }, Leaf);
+      //trace(tree);
+      final result = switch (tree) {
+        case Node(color, left, { key : k, val : x }, right) if( self.with.eq().comply(k,key).is_equal() ): 
+          //trace('match key $key');
+          Node(color,left,{key : key, val : val},right);
+        case Leaf: 
+          //trace('at leaf');
+          Node(Red, Leaf, { key: key, val: val }, Leaf);
         case Node(color, left, label, right):
             if (comparator.comply(key, label.key).is_ok())
                 RedBlackTree._.balance(Node(color, ins(left, comparator), label, right))
@@ -53,6 +75,8 @@ class RedBlackMapLift{
             else
                 tree;
       }
+      //trace(result);
+      return result;
     };
 
     return switch (ins(self.data, self.with.lt())) {
@@ -133,4 +157,20 @@ class RedBlackMapLift{
     }
     return self;
   }
+  static public function last<K,V>(self:RedBlackMap<K,V>):Option<KV<K,V>>{
+    function rec(self:RedBlackTree<KV<K,V>>,def:Option<KV<K,V>>){
+      return switch(self){
+        case Leaf                     : def;
+        case Node(_,_, label, right)  : rec(right,Some(label));
+      }
+    }
+    return rec(self.data,None);
+  }
+  static public function size<K,V>(self:RedBlackMap<K,V>){
+    return self.data.size();
+  }
+  static public function unit<K,V>(self:RedBlackMap<K,V>){
+    return RedBlackMap.make(self.with);
+  }
+
 }

@@ -4,7 +4,7 @@ enum RedBlackTreeSum<T> {
   Leaf;
   Node(color: RedBlackSum, left: RedBlackTreeSum<T>, label: T, right: RedBlackTreeSum<T>);
 }
-
+@:using(stx.ds.RedBlackTree.RedBlackTreeLift)
 @:forward abstract RedBlackTree<T>(RedBlackTreeSum<T>) from RedBlackTreeSum<T> to RedBlackTreeSum<T>{
   static public var _(default,never) = RedBlackTreeLift;
 
@@ -74,5 +74,8 @@ class RedBlackTreeLift{
         return res.fst().map((_)->true).def(()->false);
       }
     }
+  }
+  static public function size<V>(self:RedBlackTree<V>):Int{
+    return ({ iterator : () -> iterator(self)}:Iter<V>).lfold((n,m) -> m++,0);
   }
 }

@@ -27,6 +27,9 @@ typedef RedBlackSetDef<T> = { data : RedBlackTreeSum<T>, with : Comparable<T> };
       iterator : iterator
     };
   }
+  @:to public inline function toIter():Iter<T>{
+    return (toIterable():Iter<T>);
+  }
   public function iterator(){
     return RedBlackTree._.iterator(this.data);
   }
@@ -57,6 +60,12 @@ typedef RedBlackSetDef<T> = { data : RedBlackTreeSum<T>, with : Comparable<T> };
   }
   public function unit():RedBlackSet<T>{
     return make(this.with);
+  }
+  public function copy(?with,?data){
+    return make(
+      __.option(with).defv(this.with),
+      __.option(data).defv(this.data)
+    );
   }
 }
 
@@ -277,5 +286,14 @@ class RedBlackSetLift{
   }
   static public function is_defined<T>(self:RedBlackSet<T>):Bool{
     return !(self.data == Leaf);
+  }
+  static public function last<T>(self:RedBlackSet<T>):Option<T>{
+    function rec(self:RedBlackTree<T>,def:Option<T>){
+      return switch(self){
+        case Leaf                     : def;
+        case Node(_,_, label, right)  : rec(right,Some(label));
+      }
+    }
+    return rec(self.data,None);
   }
 }
