@@ -6,7 +6,7 @@ import stx.ds.test.*;
 
 class Test{
   static public function main(){
-    __.test([
+    __.test().run([
       new RedBlackMapTest(),
     ],[]);
   }

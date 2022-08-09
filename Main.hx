@@ -11,7 +11,7 @@ using stx.Test;
 class Main {
 	static function main() {
 		#if (test=="stx_ds")
-			__.test(
+			__.test().run(
 				[new SetTest()],
 				[]
 			);

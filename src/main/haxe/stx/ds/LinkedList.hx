@@ -68,13 +68,13 @@ abstract LinkedList<T>(LinkedListSum<T>) from LinkedListSum<T> to LinkedListSum<
         Cons(x, xs.concat(that));
     };
   }
-  static public function fromArray<T>(arr:Array<T>):LinkedList<T>{
+  @:from static public function fromArray<T>(arr:Array<T>):LinkedList<T>{
     return arr.rfold(
       (n:T,m:LinkedList<T>) -> m.cons(n),
       Nil
     );
   }
-  static public function fromCluster<T>(arr:Cluster<T>):LinkedList<T>{
+  @:from static public function fromCluster<T>(arr:Cluster<T>):LinkedList<T>{
     return arr.rfold(
       (n:T,m:LinkedList<T>) -> m.cons(n),
       Nil
