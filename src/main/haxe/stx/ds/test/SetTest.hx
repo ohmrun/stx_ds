@@ -38,12 +38,8 @@ class SetTest extends TestCase{
     );
     
     set = set.put(1);
-    (ipt.length-3).equals(
-      all.length
-    );
+    (ipt.length-3).equals(all.length);
     set = set.rem(100);
-    (ipt.length-3).equals(
-      all.length
-    );
+    (ipt.length-3).equals(all.length);
   }
 }

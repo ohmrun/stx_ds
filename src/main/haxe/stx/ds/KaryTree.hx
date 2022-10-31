@@ -5,7 +5,7 @@ import stx.ds.kary_tree.*;
 @:using(stx.ds.KaryTree.KaryTreeLift)
 enum KaryTreeSum<T>{
   Nought;
-  Branch(x:T,?xs:LinkedList<KaryTree<T>>);
+  Branch(x:T,xs:LinkedList<KaryTree<T>>);
 }
 
 /**

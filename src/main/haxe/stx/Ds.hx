@@ -4,20 +4,23 @@ import haxe.ds.Map in StdMap;
 
 enum RedBlackSum { Red; Black; }
 
-typedef RedBlackMapDef<K, V>  = stx.ds.RedBlackMap.RedBlackMapDef<K, V>;
-typedef RedBlackMap<K,V>      = stx.ds.RedBlackMap<K,V>;
+typedef RedBlackMapDef<K, V>          = stx.ds.RedBlackMap.RedBlackMapDef<K, V>;
+typedef RedBlackMap<K,V>              = stx.ds.RedBlackMap<K,V>;
 
-typedef RedBlackSetDef<T>     = stx.ds.RedBlackSet.RedBlackSetDef<T>;
-typedef RedBlackSet<T>        = stx.ds.RedBlackSet<T>;
+typedef RedBlackClusterMapDef<K, V>   = stx.ds.RedBlackClusterMap.RedBlackClusterMapDef<K, V>;
+typedef RedBlackClusterMap<K,V>       = stx.ds.RedBlackClusterMap<K,V>;
 
-typedef RedBlackTreeSum<T>    = stx.ds.RedBlackTree.RedBlackTreeSum<T>;
-typedef RedBlackTree<T>       = stx.ds.RedBlackTree<T>;
+typedef RedBlackSetDef<T>             = stx.ds.RedBlackSet.RedBlackSetDef<T>;
+typedef RedBlackSet<T>                = stx.ds.RedBlackSet<T>;
 
-typedef LinkedListSum<T>      = stx.ds.LinkedList.LinkedListSum<T>;
-typedef LinkedList<T>         = stx.ds.LinkedList<T>;
+typedef RedBlackTreeSum<T>            = stx.ds.RedBlackTree.RedBlackTreeSum<T>;
+typedef RedBlackTree<T>               = stx.ds.RedBlackTree<T>;
 
-typedef BinaryTreeSum<T>      = stx.ds.BinaryTree.BinaryTreeSum<T>;
-typedef BinaryTree<T>         = stx.ds.BinaryTree<T>;
+typedef LinkedListSum<T>              = stx.ds.LinkedList.LinkedListSum<T>;
+typedef LinkedList<T>                 = stx.ds.LinkedList<T>;
+
+typedef BinaryTreeSum<T>              = stx.ds.BinaryTree.BinaryTreeSum<T>;
+typedef BinaryTree<T>                 = stx.ds.BinaryTree<T>;
 
 typedef LazyBinaryTreeSum<T>  = stx.ds.LazyBinaryTree.LazyBinaryTreeSum<T>;
 typedef LazyBinaryTree<T>     = stx.ds.LazyBinaryTree<T>;

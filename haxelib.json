@@ -16,7 +16,8 @@
         "tink_core"     : "git:https://github.com/haxetink/tink_core.git",
 
         "stx_assert"    : "git:https://github.com/ohmrun/stx_assert.git",
-        "stx_fp"        : "git:https://github.com/ohmrun/stx_fp.git"
+        "stx_fp"        : "git:https://github.com/ohmrun/stx_fp.git",
+        "stx_log"        : "git:https://github.com/ohmrun/stx_log.git"
     },
     "classPath": "src/main/haxe"
 }

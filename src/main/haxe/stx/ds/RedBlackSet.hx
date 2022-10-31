@@ -228,6 +228,9 @@ class RedBlackSetLift{
     }
     return out;
   }
+  static public function toCluster<T>(self:RedBlackSet<T>):Cluster<T>{
+    return Cluster.lift(toArray(self));
+  }
   static public function union<T>(self:RedBlackSet<T>,that:RedBlackSet<T>):RedBlackSet<T>{
     for(val in that){
       self = self.put(val);

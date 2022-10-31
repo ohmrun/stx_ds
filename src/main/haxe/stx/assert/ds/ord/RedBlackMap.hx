@@ -11,8 +11,8 @@ class RedBlackMap<K,V> extends OrdCls<TRedBlackMap<K,V>>{
   }
   public function comply(lhs:TRedBlackMap<K,V>,rhs:TRedBlackMap<K,V>){
     var ord     = NotLessThan;
-    var liter   = lhs.iterator();
-    var riter   = rhs.iterator();
+    var liter   = lhs.keyValueIterator();
+    var riter   = rhs.keyValueIterator();
     final keys  = RedBlackSet.make(lhs.with);
     var lsize   = 0;
     var rsize   = 0;
