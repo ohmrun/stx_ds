@@ -13,11 +13,11 @@
     "version": "0.2.1",
     "url": "http://www.example.com",
     "dependencies": {
-        "tink_core"     : "git:https://github.com/haxetink/tink_core.git",
+        "tink_core"     : "",
 
-        "stx_assert"    : "git:https://github.com/ohmrun/stx_assert.git",
-        "stx_fp"        : "git:https://github.com/ohmrun/stx_fp.git",
-        "stx_log"        : "git:https://github.com/ohmrun/stx_log.git"
+        "stx_assert"    : "",
+        "stx_fp"        : "",
+        "stx_log"        : ""
     },
     "classPath": "src/main/haxe"
 }
