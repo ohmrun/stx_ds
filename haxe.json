@@ -17,6 +17,10 @@
         "-main" : "stx.ds.Test",
         "--interp" :  true
       }
+    },
+    "test" : {
+      "-cp" : "src/main/haxe",
+      "-L"  : ["stx_test"]
     }
   }
 }
