@@ -42,6 +42,7 @@ typedef RedBlackMapDef<K, V>  = {
   public function union(that:RedBlackMap<K,V>):RedBlackMap<K,V> return _.union(self,that);
 
   @:to public function toIter():Iter<V>                         return new Iter({ iterator : iterator });
+  @:to public function toIterKV():IterKV<K,V>                   return IterKV.lift({ keyValueIterator : keyValueIterator });
 
   private var self(get,never):RedBlackMap<K,V>;
   private function get_self():RedBlackMap<K,V> return this;
