@@ -13,7 +13,7 @@ class RedBlackMap<K,V> extends OrdCls<TRedBlackMap<K,V>>{
     var ord     = NotLessThan;
     var liter   = lhs.keyValueIterator();
     var riter   = rhs.keyValueIterator();
-    final keys  = RedBlackSet.make(lhs.with);
+    final keys  = stx.ds.RedBlackSet.make(lhs.with);
     var lsize   = 0;
     var rsize   = 0;
 

@@ -1,5 +1,9 @@
 package stx;
 
+using stx.Pico;
+using stx.Nano;
+using stx.Assert;
+
 import haxe.ds.Map in StdMap;
 
 enum RedBlackSum { Red; Black; }
