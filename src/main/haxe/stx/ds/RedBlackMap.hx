@@ -34,6 +34,14 @@ typedef RedBlackMapDef<K, V>  = {
 
   public function set(k:K,v:V):RedBlackMap<K,V>                 return _.set(self,k,v);
   public function put(kv:KV<K,V>):RedBlackMap<K,V>              return set(kv.key,kv.val);
+
+  public function concat(iter:Iterable<KV<K,V>>):RedBlackMap<K,V>       {
+    var next = self;
+    for(v in iter){
+      next = next.put(v);
+    }
+    return next;
+  }
   public function get(k:K):Option<V>                            return _.get(self,k);
   public function has(k:K):Bool                                 return _.get(self,k).is_defined();
   public function rem(k:K):RedBlackMap<K,V>                     return _.rem(self,k);
