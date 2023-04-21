@@ -184,5 +184,4 @@ class RedBlackMapLift{
   static public function unit<K,V>(self:RedBlackMapDef<K,V>){
     return RedBlackMap.make(self.with);
   }
-
-}
+} 
