@@ -1,6 +1,6 @@
 package stx.graph.inductive.unlabelled;
 
-import tink.core.Noise;
+import stx.pico.Nada;
 using stx.Tuple;
 
 
@@ -17,10 +17,10 @@ import stx.data.Adjacent in TAdjacent;
     );
     return new Adjacent(out);
   }
-  @:from static public function fromArrayOfNodes<A>(arr:ReadonlyArray<Node>):Adjacent<Noise>{
+  @:from static public function fromArrayOfNodes<A>(arr:ReadonlyArray<Node>):Adjacent<Nada>{
     var out = arr.map(
-      function(n):Edge<Noise>{
-        var edge : Edge<Noise> = n;
+      function(n):Edge<Nada>{
+        var edge : Edge<Nada> = n;
         return n;
       }
     );

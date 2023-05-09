@@ -1,7 +1,7 @@
 package stx;
 
 using stx.Tuple;
-import tink.core.Noise;
+import stx.pico.Nada;
 
 import stx.data.Edge in TEdge;
 
@@ -9,8 +9,8 @@ import stx.data.Edge in TEdge;
   static public function create<T>(label:T,node:Node){
     return new Edge(tuple2(label,node));
   }
-  @:from static public function fromNode(n:Node):Edge<Noise>{
-    return new Edge(tuple2(Noise,n));
+  @:from static public function fromNode(n:Node):Edge<Nada>{
+    return new Edge(tuple2(Nada,n));
   }
   public function new(self){
     this = self;
