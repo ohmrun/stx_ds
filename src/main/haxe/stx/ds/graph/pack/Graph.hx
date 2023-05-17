@@ -44,7 +44,7 @@ typedef GraphDef = {
 
 class GraphLift{
   static public function connect(l:Graph,r:Graph):Graph{
-    __.assert().exists(l);__.assert().exists(r);
+    __.assert().that().exists(l);__.assert().that().exists(r);
     var next_vertices   = l.vertices.union(r.vertices);
     var next_edges      = 
         l.edges.union(r.edges)

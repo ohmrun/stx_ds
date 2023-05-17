@@ -19,7 +19,7 @@ abstract KaryTree<T>(KaryTreeSum<T>) from KaryTreeSum<T> to KaryTreeSum<T>{
   @:noUsing inline static public function pure<T>(v:T):KaryTree<T> return Branch(v,Nil);
   
   public function new(?self:KaryTreeSum<T>){
-    this = __.that().exists().ordef(self,Nought);
+    this = __.assert().expect().exists().ordef(self,Nought);
   }
   public function df(){
     return KaryTreeLift.iterDF(this);
@@ -91,7 +91,7 @@ class KaryTreeLift{
       return switch(v){
         case Nought          : "";
         case Branch(v,rst)  : 
-          var arr = __.that().exists().ordef(rst,Nil); 
+          var arr = __.assert().expect().exists().ordef(rst,Nil); 
           var out = arr.map((next) -> return rec(next,'$int '));
           var val = out.fold(
             (next,memo) -> '$memo\n$int$next'
