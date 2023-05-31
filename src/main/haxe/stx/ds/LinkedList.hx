@@ -137,6 +137,17 @@ abstract LinkedList<T>(LinkedListSum<T>) from LinkedListSum<T> to LinkedListSum<
       case Cons(x, xs)  : Cons(f(x), __.option(xs).map( _ -> _.map(f)).defv(null));
     };
   }
+  public function imap<B>(f : Int -> T -> B) : LinkedList<B>{
+    function rec(self:LinkedList<T>,int:Int):LinkedList<B>{
+      return switch self {
+        case Nil          : Nil;
+        case Cons(x, xs)  : Cons(
+          f(int,x), __.option(xs).map( _ -> rec(_,int++)).defv(null)
+        );
+      };
+    }
+    return rec(this,0);
+  }
   public function map_filter<B>(f : T -> Option<B>) : LinkedList<B>{
     return switch this{
       case Nil          : Nil;
