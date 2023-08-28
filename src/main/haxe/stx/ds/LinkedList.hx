@@ -4,7 +4,7 @@ enum LinkedListSum<T>{
   Nil;
   Cons(head:T,tail:LinkedList<T>);
 }
-
+@:using(stx.ds.LinkedList.LinkedListLift)
 abstract LinkedList<T>(LinkedListSum<T>) from LinkedListSum<T> to LinkedListSum<T>{
   // @:from static public function fromIndex<T>(arr:StdArray<T>):LinkedList<T>{
   //   var self   = unit();
@@ -280,5 +280,15 @@ abstract LinkedList<T>(LinkedListSum<T>) from LinkedListSum<T> to LinkedListSum<
       (n,m:Cluster<T>) -> m.snoc(n),
       [].imm()
     );
+  }
+}
+class LinkedListLift{
+  static public function rpad<T>(self:LinkedList<T>,len:Int,?val:T){
+    final size = self.size();
+    final left = len - size;
+    for(i in 0...left){
+      self = self.snoc(val);
+    }
+    return self;
   }
 }
