@@ -19,8 +19,12 @@
       }
     },
     "test" : {
-      "-cp" : "src/main/haxe",
-      "-L"  : ["stx_test"]
+      "-cp" : "src/test/haxe",
+      "-L"  : ["stx_test"],
+      "--main" : "stx.ds.Test",
+      "interp" : {
+        "--interp" : true
+      }
     }
   }
 }

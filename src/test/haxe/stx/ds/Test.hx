@@ -17,4 +17,5 @@ class RedBlackMapTest extends TestCase{
         map = map.set("a",1).set("a",2).set("b",1000);
     trace(map.get("b"));
   }
+  pub
 }

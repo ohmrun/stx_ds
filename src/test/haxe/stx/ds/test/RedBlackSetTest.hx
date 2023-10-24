@@ -10,6 +10,7 @@ class RedBlackSetTest extends TestCase{
     trace(v.snd());
   }
   public function test1(){
-
+    var set = RedBlackSet.make(Comparable.Int());
   } 
+  public functi
 }
